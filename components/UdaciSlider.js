@@ -5,7 +5,7 @@ export default class UdaciSliders extends React.Component{
   render(){
     return (
       <View>
-        <Text>UdaciSteppers</Text>
+        <Text>UdaciSliders</Text>
       </View>
     )
   }

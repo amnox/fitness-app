@@ -6,6 +6,8 @@ import {
 import {
   getMetricMetaInfo
 } from '../utils/helpers'
+import UdaciSlider from './UdaciSlider'
+import UdaciSteppers from './UdaciSteppers'
 
 export default class AddEntry extends React.Component {
   state = {
