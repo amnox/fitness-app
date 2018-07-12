@@ -4,12 +4,15 @@ import {
   Text
 } from 'react-native'
 import {
-  getMetricMetaInfo
+  getMetricMetaInfo,
+  timeToString
 } from '../utils/helpers'
 import UdaciSlider from './UdaciSlider'
 import UdaciSteppers from './UdaciSteppers'
+import DateHeader from './DateHeader'
 
 export default class AddEntry extends React.Component {
+
   state = {
     run: 0,
     bike: 0,
@@ -17,7 +20,8 @@ export default class AddEntry extends React.Component {
     sleep: 0,
     eat: 0
   }
-  increament = (metric) => {
+
+  increment = (metric) => {
     const {
       max,
       step
@@ -33,7 +37,7 @@ export default class AddEntry extends React.Component {
     }
   }
 
-  decreament = (metric) => {
+  decrement = (metric) => {
     this.setState((state) => {
       const count = state[metric] + getMetricMetaInfo(metric).step
     })
@@ -50,13 +54,48 @@ export default class AddEntry extends React.Component {
       }))
   }
 
+  submit = () => {
+    const key = timeToString()
+    const entry = this.state
+
+    //Update Redux
+
+    //Navigate to home
+
+    //Save to DB
+
+    //Clean local Notification
+  }
+
   render() {
+    const metaInfo = getMetricMetaInfo()
     return ( 
       <View>
-        <Text> Add Entry Component </Text> 
-        {
-          getMetricMetaInfo('bike').getIcon()
-        }
+        <DateHeader date={(new Date().toLocalDate)}/>
+        {Object.keys(metaInfo).map((key) => {
+          const { getIcon, type, ...rest } = metaInfo[key]
+          const value = this.state[key]
+
+          return (
+            <View key={key}>
+              {getIcon()}
+              {
+                type === 'slider'
+                  ? <UdaciSlider
+                      value={value}
+                      onChange={(value) => this.slide(key, value)}
+                      {...rest}
+                    />
+                  : <UdaciSteppers
+                      value={value}
+                      onIncrement={() => this.increment(key)}
+                      onDecrement={() => this.decrement(key)}
+                      {...rest}
+                    />
+              }
+            </View>
+          )
+        })}
       </View>
     )
   }
