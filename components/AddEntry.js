@@ -24,7 +24,7 @@ import { white } from '../utils/colors'
 function SubmitBtn ({ onPress }) {
   return (
     <TouchableOpacity
-      style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn}
+      style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.androidSubmitBtn}
       onPress={onPress}>
       <Text style={styles.submitBtnText}>SUBMIT</Text>
     </TouchableOpacity>
@@ -124,15 +124,15 @@ class AddEntry extends React.Component {
     }
 
     return ( 
-      <View>
-        <DateHeader date={(new Date().toLocalDate)}/>
-        <Text>{JSON.stringify(this.state)}</Text>
+      <View style={styles.container}>
+        <DateHeader date={(new Date().toLocaleDateString())}/>
+
         {Object.keys(metaInfo).map((key) => {
           const { getIcon, type, ...rest } = metaInfo[key]
           const value = this.state[key]
 
           return (
-            <View key={key}>
+            <View key={key} style={styles.row}>
               {getIcon()}
               {
                 type === 'slider'
@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
     marginLeft: 40,
     marginRight: 40,
   },
-  AndroidSubmitBtn: {
+  androidSubmitBtn: {
     backgroundColor: 'purple',
     padding: 10,
     paddingLeft: 30,

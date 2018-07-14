@@ -149,7 +149,7 @@ export function getMetricMetaInfo (metric){
           <View style={[styles.iconContainer,{backgroundColor: pink}]}>
             <MaterialCommunityIcons
               name = 'food'
-              color = {'black'}
+              color = {'white'}
               size = {35}
             />
           </View>
