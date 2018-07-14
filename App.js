@@ -10,6 +10,9 @@ import {
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import AddEntry from './components/AddEntry'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import reducer from './reducers'
 
 export default class App extends React.Component {
   handlePress = () => {
@@ -17,12 +20,11 @@ export default class App extends React.Component {
   }
   render() {
     return (
-      <View style={styles.container}>
-        <AddEntry/>
-        <TouchableHighlight style={styles.btn} onPress={this.handlePress} underlayColor='#d4271b'>
-          <Text>Touchable Highlight</Text>
-        </TouchableHighlight>
-      </View>
+      <Provider store = {createStore(reducer)}>
+        <View style={styles.container}>
+          <AddEntry/>
+        </View>
+      </Provider>
     );
   }
 }
