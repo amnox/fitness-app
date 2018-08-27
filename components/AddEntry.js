@@ -117,7 +117,7 @@ class AddEntry extends React.Component {
           />
           <Text>You already logged your info for today</Text>
           <TextButton onPress={this.reset}>
-            Reset
+            Reset Log
           </TextButton>
         </View>
       )
